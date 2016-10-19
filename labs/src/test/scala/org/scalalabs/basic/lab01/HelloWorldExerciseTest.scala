@@ -6,12 +6,11 @@ import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
 
 /**
- * Beginner Hello World:
- * Scala Objects
- * Scala inheritence with Traits
- * Scala Classes and companion Objects
- */
-@RunWith(classOf[JUnitRunner])
+  * Beginner Hello World:
+  * Scala Objects
+  * Scala inheritence with Traits
+  * Scala Classes and companion Objects
+  */
 class HelloWorldExerciseTest extends Specification {
 
   /*
