@@ -15,8 +15,7 @@ object ListManipulationExercise01 {
    *
    */
   def firstElementInList[T](l: List[T]): T = {
-    //buildin
-    null.asInstanceOf[T]
+    l.head
   }
 
   /**
@@ -25,7 +24,7 @@ object ListManipulationExercise01 {
    * https://www.scala-lang.org/docu/files/api/scala/List.html#foldLeft(B)
    */
   def sumOfList(l: List[Int]): Int = {
-    error("fix me")
+    l.sum
   }
 
   /**
@@ -37,7 +36,7 @@ object ListManipulationExercise01 {
    *  - ... etc
    */
   def lastElementInList[T](l: List[T]): T = {
-    error("fix me")
+    l.foldLeft(l.headOption)((_, i) => Some(i)).getOrElse(error("empty"))
   }
 
   /**
@@ -49,7 +48,11 @@ object ListManipulationExercise01 {
    *  - ... etc
    */
   def nthElementInList[T](n: Int, l: List[T]): T = {
-    error("fix me")
+    n match {
+      case x if x < 0 || x > l.length => error("wrong index")
+      case 0 => l.head
+      case _ => nthElementInList(n - 1, l.tail)
+    }
   }
 
   /**
@@ -61,7 +64,10 @@ object ListManipulationExercise01 {
    *  - ... etc
    */
   def concatLists[T](l1: List[T], l2: List[T]): List[T] = {
-    error("fix me")
+    l2 match {
+      case Nil => l1
+      case x :: xs => concatLists(l1 :+ x, xs)
+    }
   }
 
   /**
@@ -73,7 +79,10 @@ object ListManipulationExercise01 {
    *
    */
   def sortList[T <% Ordered[T]](list: List[T]): List[T] = {
-    error("fix me")
+    list.foldLeft(List.empty[T])((acc, i) => {
+      val (sorted, tail) = acc.span(_ < i)
+      sorted ::: i :: tail
+    })
   }
 
   /**
@@ -81,7 +90,7 @@ object ListManipulationExercise01 {
    * Again, easy to implement using built-in functionality, but also possible to implement in your own free-style way.
    */
   def elementExists[T](l: List[T], e: T): Boolean = {
-    error("fix me")
+    l.foldLeft(false)((acc, i) => acc || i == e)
   }
 
   /**
@@ -90,7 +99,7 @@ object ListManipulationExercise01 {
    * pattern match or some other method.
    */
   def oddElements(iList: List[Int]): List[Int] = {
-    error("fix me")
+    iList.foldLeft(List.empty[Int])((acc, i) => if (i % 2 != 0) acc :+ i else acc)
   }
 
   /**
@@ -101,7 +110,10 @@ object ListManipulationExercise01 {
    * Implement it whatever way suites you best. Hint: it can be done in a neat way using recursion.
    */
   def tails[T](l: List[T]): List[List[T]] = {
-    error("fix me")
+    l match {
+      case Nil => List(List())
+      case _ :: xs => l :: tails(xs)
+    }
   }
 }
 

@@ -15,7 +15,7 @@ import CollectionExercise02.Person
 @RunWith(classOf[JUnitRunner])
 class CollectionExerciseTest extends Specification {
 
-  "CollectionExercise01: GoogleCodeJam" should {
+  /*"CollectionExercise01: GoogleCodeJam" should {
     "get first Element in list" in {
       val in1 = "ejp mysljylc kd kxveddknmc re jsicpdrysi"
       val in2 = "rbcpc ypc rtcsra dkh wyfrepkym veddknkmkrkcd"
@@ -27,7 +27,7 @@ class CollectionExerciseTest extends Specification {
       val result = CollectionExercise01.googleCodeJamGooglerese(in1, in2, in3)
       Seq(out1, out2, out3) === result
     }
-  }
+  }*/
 
   "CollectionExercise02:" should {
     "group a list of adults by age group. Each group is sorted by name" in {

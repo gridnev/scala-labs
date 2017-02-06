@@ -50,7 +50,7 @@ object CollectionExercise02 {
    * using a functional approach.
    */
   def groupAdultsPerAgeGroup(persons: Seq[Person]): Map[Int, Seq[Person]] = {
-    error("fix me")
+    persons.filter(_.age > 18).sortBy(_.name).groupBy(_.age / 10 * 10)
   }
 }
 
@@ -64,9 +64,11 @@ object CollectionExercise03 {
    * checkValuesIncrease(Seq(1,2,3)) == true
    * checkValuesIncrease(Seq(1,2,2)) == false
    */
-  def checkValuesIncrease[T <% Ordered[T]](seq: Seq[T]): Boolean =
-    error("fix me")
-
+  def checkValuesIncrease[T <% Ordered[T]](seq: Seq[T]): Boolean = seq match {
+    case Nil => true
+    case _ :: Nil => true
+    case x :: xs => x < xs.head && checkValuesIncrease(xs)
+  }
 }
 /*========================================================== */
 
@@ -76,7 +78,7 @@ object CollectionExercise04 {
    * To keep it simple it's ok to use String.split to extract all words of a sentence.
    */
   def calcLengthLongestWord(lines: String*): Int = {
-    error("fix me")
+    lines.map(_.split(' ').maxBy(_.length).length).max
   }
 }
 
@@ -88,7 +90,7 @@ object CollectionExercise05 {
    * E.g. Seq(1,2,3) is Seq(2)
    */
   def filterWithFoldLeft(seq: Seq[Int]): Seq[Int] = {
-    error("fix me")
+    seq.foldLeft(Seq[Int]())((s, i) => if (i % 2 == 0) s :+ i else s)
   }
 
   /**
@@ -97,7 +99,10 @@ object CollectionExercise05 {
    * E.g: Seq(1,2,3) is Map(true -> Seq(2), false -> Seq(1,3))
    */
   def groupByWithFoldLeft(seq: Seq[Int]): Map[Boolean, Seq[Int]] = {
-    error("fix me")
+    seq.foldLeft(Map(true -> Seq[Int](), false -> Seq[Int]()))((m, i)=> {
+      val key = i % 2 == 0
+      m + (key -> (m(key) :+ i))
+    })
   }
 }
 

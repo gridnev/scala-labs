@@ -10,24 +10,26 @@ object ListManipulationExercise02 {
    * As usual, various ways exist: pattern matching, folding, ...
    */
   def maxElementInList(l: List[Int]): Int = {
-    error("fix me")
+    l.foldLeft(l.head){(max, i) => if(max < i) i else max}
   }
 
   /**
    * Calculate the sum of the equally position elements
    * of the two list
    */
-  def sumOfTwo(l1: List[Int], l2: List[Int]): List[Int] = {
-    error("fix me")
+  def sumOfTwo(l1: List[Int], l2: List[Int]): List[Int] = (l1, l2) match {
+    case (x, Nil) => x
+    case (Nil, y) => y
+    case (x, y) => x.zip(y).map { case (p1, p2) => p1 + p2 }
   }
+
 
   /**
    *  For this exercise preferably make use of the sumOfTwo
    * method above
    */
-  def sumOfMany(l: List[Int]*): List[Int] = {
-    error("fix me")
-  }
+  def sumOfMany(l: List[Int]*): List[Int] = l.foldLeft(List.empty[Int])((acc, i) => sumOfTwo(acc, i))
+
 
   case class Person(age: Int, firstName: String, lastName: String)
 
@@ -37,7 +39,7 @@ object ListManipulationExercise02 {
    * may be able to achieve the same functionality as implemented below
    * in a one-liner.
    */
-  def separateTheMenFromTheBoys(persons: List[Person]): List[List[String]] = {
+  def separateTheMenFromTheBoys1(persons: List[Person]): List[List[String]] = {
     var boys: ListBuffer[Person] = new ListBuffer[Person]()
     var men: ListBuffer[Person] = new ListBuffer[Person]()
     var validBoyNames: ListBuffer[String] = new ListBuffer[String]()
@@ -61,6 +63,14 @@ object ListManipulationExercise02 {
       validMenNames += man.firstName
     }
     List(validBoyNames.toList, validMenNames.toList)
+  }
+
+  def separateTheMenFromTheBoys(persons: List[Person]): List[List[String]] = {
+    val (boys, men) = persons.partition(_.age < 18)
+
+    def test(list: List[Person]) = list.sortBy(_.age).map(_.firstName)
+
+    List(test(boys), test(men))
   }
 
 }
