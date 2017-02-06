@@ -14,7 +14,19 @@ import org.scalatest.junit._
  * - Happy flow (divider is > 0)
  * - Alternative flow (divider is <= 0)
  */
-//@RunWith(classOf[JUnitRunner])
-class ScalaTestExerciseTest {
+@RunWith(classOf[JUnitRunner])
+class ScalaTestExerciseTest extends FunSuite{
+  test("Happy flow (divider is > 0)") {
+    val e2 = new Euro(2, 50) / 2
+
+    assert(e2.euro == 1)
+    assert(e2.cents == 25)
+  }
+
+  test("Alternative flow (divider is <= 0)") {
+    intercept[IllegalArgumentException]{
+      new Euro(2) / 0
+    }
+  }
 
 }

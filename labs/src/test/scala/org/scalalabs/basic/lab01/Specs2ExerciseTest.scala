@@ -1,6 +1,7 @@
 package org.scalalabs.basic.lab01
 
 import org.junit.runner.RunWith
+import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
 /**
  * In this Lab you will implement a Specs2 testcase.
@@ -13,7 +14,17 @@ import org.specs2.runner.JUnitRunner
  * - Happy flow (divider is > 0)
  * - Alternative flow (divider is <= 0)
  */
-//@RunWith(classOf[JUnitRunner])
-class Specs2ExerciseTest {
+@RunWith(classOf[JUnitRunner])
+class Specs2ExerciseTest extends Specification {
+  "def /(divider:Int)" should {
+    "Happy flow (divider is > 0)" in {
+      val e = new Euro(2, 50) / 2
+      e.euro ==== 1
+      e.cents ==== 25
+    }
 
+    "Alternative flow (divider is <= 0)" in {
+      new Euro(2, 50) / 0 must throwA[IllegalArgumentException]
+    }
+  }
 }

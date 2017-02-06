@@ -72,6 +72,13 @@ class Euro(val euro:Int, val cents:Int = 0) extends Currency("EUR") with Ordered
     else if (this.inCents > that.inCents) 1
     else 0
   }
+
+  def /(divider:Int):Euro = {
+    if(divider <=0 )
+      throw new IllegalArgumentException()
+    else
+      Euro.fromCents(inCents / divider)
+  }
 }
 
 object Dollar{
